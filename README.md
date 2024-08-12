@@ -12,7 +12,7 @@ For the first time, designers can create **and ship** beautiful animations witho
 
 ## Breaking Changes in v6!
 
-We've made some significant updates in version 6 that may impact your current setup. To get all the details about these changes, check out the [migration guide](/MIGRATION-5-TO-6.md).
+We've made some significant updates in version 6 that may impact your current setup. To get all the details about these changes, check out the [changelog](/CHANGELOG.md).
 
 Stay informed to ensure a seamless transition to the latest version. Thank you!
 
@@ -41,7 +41,7 @@ yarn add lottie-react-native
 - Add dependencies for web players:
 
 ```
-yarn add @dotlottie/react-player
+yarn add @dotlottie/react-player @lottiefiles/react-lottie-player
 ```
 
 ### Windows (React Native >= 0.63)
@@ -105,33 +105,24 @@ Codegen animations are supported by adding LottieAnimation items to your project
 
 ```js
 // js
-<LottieView source={"MyAnimation"} style={{width: "100%", height: "100%"}} />
+<LottieView source={'MyAnimation'} />
 ```
 
 Codegen is available to both C# and C++ applications. Dynamic loading of JSON strings at runtime is currently only supported in C# applications.
 
 </details>
 
-## Privacy (iOS)
-
-Lottie iOS and Lottie React Native do not collect any data. We provide this notice to help you fill out [App Privacy Details](https://developer.apple.com/app-store/app-privacy-details/). Both libraries provide privacy manifests ([Lottie iOS's privacy manifest](https://github.com/airbnb/lottie-ios/blob/master/Sources/PrivacyInfo.xcprivacy), [Lottie React Native's privacy manifest](https://github.com/lottie-react-native/lottie-react-native/blob/master/packages/core/ios/PrivacyInfo.xcprivacy)) which can be included in your app and are available as bundle resources within the libraries by default.
-
 ## Usage
 
 Lottie can be used in a declarative way:
 
 ```jsx
-import React from "react";
-import LottieView from "lottie-react-native";
+import React from 'react';
+import LottieView from 'lottie-react-native';
 
 export default function Animation() {
   return (
-    <LottieView
-      source={require("../path/to/animation.json")}
-      style={{width: "100%", height: "100%"}}
-      autoPlay
-      loop
-    />
+    <LottieView source={require('../path/to/animation.json')} autoPlay loop />
   );
 }
 ```
@@ -139,8 +130,8 @@ export default function Animation() {
 Additionally, there is an imperative API which is sometimes simpler.
 
 ```tsx
-import React, { useEffect, useRef } from "react";
-import LottieView from "lottie-react-native";
+import React, { useEffect, useRef } from 'react';
+import LottieView from 'lottie-react-native';
 
 export default function AnimationWithImperativeApi() {
   const animationRef = useRef<LottieView>(null);
@@ -155,8 +146,7 @@ export default function AnimationWithImperativeApi() {
   return (
     <LottieView
       ref={animationRef}
-      source={require("../path/to/animation.json")}
-      style={{width: "100%", height: "100%"}}
+      source={require('../path/to/animation.json')}
     />
   );
 }
@@ -165,9 +155,9 @@ export default function AnimationWithImperativeApi() {
 Lottie's animation view can be controlled by either React Native Animated or Reanimated API.
 
 ```tsx
-import React, { useEffect, useRef, Animated } from "react";
-import { Animated, Easing } from "react-native";
-import LottieView from "lottie-react-native";
+import React, { useEffect, useRef, Animated } from 'react';
+import { Animated, Easing } from 'react-native';
+import LottieView from 'lottie-react-native';
 
 const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
 
@@ -185,9 +175,8 @@ export default function ControllingAnimationProgress() {
 
   return (
     <AnimatedLottieView
-      source={require("../path/to/animation.json")}
+      source={require('../path/to/animation.json')}
       progress={animationProgress.current}
-      style={{width: "100%", height: "100%"}}
     />
   );
 }
@@ -198,24 +187,23 @@ Changing color of layers:
 NOTE: This feature may not work properly on Android. We will try fix it soon.
 
 ```jsx
-import React from "react";
-import LottieView from "lottie-react-native";
+import React from 'react';
+import LottieView from 'lottie-react-native';
 
 export default function ChangingColorOfLayers() {
   return (
     <LottieView
-      source={require("../path/to/animation.json")}
+      source={require('../path/to/animation.json')}
       colorFilters={[
         {
-          keypath: "button",
-          color: "#F00000",
+          keypath: 'button',
+          color: '#F00000',
         },
         {
-          keypath: "Sending Loader",
-          color: "#F00000",
+          keypath: 'Sending Loader',
+          color: '#F00000',
         },
       ]}
-      style={{width: "100%", height: "100%"}}
       autoPlay
       loop
     />
@@ -228,7 +216,7 @@ export default function ChangingColorOfLayers() {
 You need to modify your `metro.config.js` file accordingly by adding `lottie` extension to the `assetExts` array:
 
 ```js
-const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 
 const defaultConfig = getDefaultConfig(__dirname);
 
@@ -240,7 +228,7 @@ const defaultConfig = getDefaultConfig(__dirname);
  */
 const config = {
   resolver: {
-    assetExts: [...defaultConfig.resolver.assetExts, "lottie"],
+    assetExts: [...defaultConfig.resolver.assetExts, 'lottie'],
   },
 };
 
@@ -252,7 +240,7 @@ module.exports = mergeConfig(getDefaultConfig(__dirname), config);
 Create a file in the following path `__mocks__/lottieMock.js` and add the following code:
 
 ```js
-module.exports = "lottie-test-file-stub";
+module.exports = 'lottie-test-file-stub';
 ```
 
 Then add the following to your `jest.config.js` file:
@@ -285,8 +273,6 @@ You can find the full list of props and methods available in our [API document](
 ## Troubleshooting
 
 Not all After Effects features are supported by Lottie. If you notice there are some layers or animations missing check [this list](https://github.com/airbnb/lottie/blob/master/supported-features.md) to ensure they are supported.
-
-When it comes to animations, please validate that your animation file is compliant with the standard (for example, that it doesn't have floating number in places that require integers). If you have an animation that is not working as expected, it is always recommended that you look at the [Logcat output on Android](https://developer.android.com/studio/debug/logcat) and the [console on iOS](https://developer.apple.com/documentation/xcode/stepping-through-code-and-inspecting-variables-to-isolate-bugs), as both ecosystems will have logs attached in case of an error that usually highlights what has gone wrong.
 
 ## More
 
