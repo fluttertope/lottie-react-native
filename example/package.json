@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@callstack/react-native-visionos": "^0.73.0",
-    "lottie-react-native": "file:*",
+    "lottie-react-native": "workspace:*",
     "react": "18.2.0",
     "react-native": "0.73.8",
     "react-native-macos": "^0.73.0"
